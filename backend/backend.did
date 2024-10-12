@@ -1,0 +1,13 @@
+type Fund = 
+ record {
+   annualReturn: float64;
+   expenseRatio: float64;
+   name: text;
+   ticker: text;
+ };
+service : {
+  addFund: (text, text, float64, float64) -> ();
+  compareFunds: (vec text) -> (vec opt Fund) query;
+  getAllFunds: () -> (vec Fund) query;
+  getFund: (text) -> (opt Fund) query;
+}

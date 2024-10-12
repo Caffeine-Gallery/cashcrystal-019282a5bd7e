@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fund Analyser</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <h1>Fund Analyser</h1>
+    </header>
+    <main>
+        <section id="add-fund">
+            <h2>Add New Fund</h2>
+            <form id="add-fund-form">
+                <input type="text" id="fund-name" placeholder="Fund Name" required>
+                <input type="text" id="fund-ticker" placeholder="Ticker" required>
+                <input type="number" id="annual-return" placeholder="Annual Return (%)" step="0.01" required>
+                <input type="number" id="expense-ratio" placeholder="Expense Ratio (%)" step="0.01" required>
+                <button type="submit">Add Fund</button>
+            </form>
+        </section>
+        <section id="fund-list">
+            <h2>Fund List</h2>
+            <ul id="funds"></ul>
+        </section>
+        <section id="fund-comparison">
+            <h2>Fund Comparison</h2>
+            <div id="comparison-result"></div>
+        </section>
+    </main>
+    <script type="module" src="index.js"></script>
+</body>
+</html>
