@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const addFundForm = document.getElementById('add-fund-form');
   const fundList = document.getElementById('funds');
   const comparisonResult = document.getElementById('comparison-result');
+  const custodyFeesList = document.getElementById('custody-fees-list');
 
   addFundForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -48,6 +49,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     comparisonResult.innerHTML = comparisonHTML;
   }
 
+  async function displayCustodyFees() {
+    const custodyFees = await backend.getCustodyFees();
+    let feesHTML = '<table><tr><th>Bank</th><th>Custody Fee</th></tr>';
+    custodyFees.forEach(fee => {
+      feesHTML += `<tr><td>${fee.bank}</td><td>${fee.fee.toFixed(2)}%</td></tr>`;
+    });
+    feesHTML += '</table>';
+    custodyFeesList.innerHTML = feesHTML;
+  }
+
   await updateFundList();
   compareFunds();
+  displayCustodyFees();
 });

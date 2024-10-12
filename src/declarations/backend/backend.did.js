@@ -5,6 +5,7 @@ export const idlFactory = ({ IDL }) => {
     'annualReturn' : IDL.Float64,
     'expenseRatio' : IDL.Float64,
   });
+  const CustodyFee = IDL.Record({ 'fee' : IDL.Float64, 'bank' : IDL.Text });
   return IDL.Service({
     'addFund' : IDL.Func(
         [IDL.Text, IDL.Text, IDL.Float64, IDL.Float64],
@@ -17,6 +18,7 @@ export const idlFactory = ({ IDL }) => {
         ['query'],
       ),
     'getAllFunds' : IDL.Func([], [IDL.Vec(Fund)], ['query']),
+    'getCustodyFees' : IDL.Func([], [IDL.Vec(CustodyFee)], ['query']),
     'getFund' : IDL.Func([IDL.Text], [IDL.Opt(Fund)], ['query']),
   });
 };

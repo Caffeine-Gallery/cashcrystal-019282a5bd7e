@@ -5,9 +5,15 @@ type Fund =
    name: text;
    ticker: text;
  };
+type CustodyFee = 
+ record {
+   bank: text;
+   fee: float64;
+ };
 service : {
   addFund: (text, text, float64, float64) -> ();
   compareFunds: (vec text) -> (vec opt Fund) query;
   getAllFunds: () -> (vec Fund) query;
+  getCustodyFees: () -> (vec CustodyFee) query;
   getFund: (text) -> (opt Fund) query;
 }
