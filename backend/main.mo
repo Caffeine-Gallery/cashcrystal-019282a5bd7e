@@ -18,18 +18,19 @@ actor FundAnalyser {
     bank: Text;
     fee: Float;
     sourceLink: Text;
+    calculationMethod: Text;
   };
 
   stable var fundEntries : [(Text, Fund)] = [];
   var funds = HashMap.HashMap<Text, Fund>(10, Text.equal, Text.hash);
 
   let custodyFees : [CustodyFee] = [
-    { bank = "UBS"; fee = 0.15; sourceLink = "https://www.ubs.com/ch/en/private/accounts-and-cards/accounts/custody-account.html" },
-    { bank = "Swissquote"; fee = 0.12; sourceLink = "https://en.swissquote.com/trading/pricing" },
-    { bank = "ZKB"; fee = 0.14; sourceLink = "https://www.zkb.ch/en/private-customers/investments/custody-account-and-trading.html" },
-    { bank = "Raiffeisen"; fee = 0.13; sourceLink = "https://www.raiffeisen.ch/rch/en/private-clients/invest/custody-account.html" },
-    { bank = "Postfinance"; fee = 0.11; sourceLink = "https://www.postfinance.ch/en/private/products/investing/custody-account.html" },
-    { bank = "Julius Baer"; fee = 0.16; sourceLink = "https://www.juliusbaer.com/en/services/custody-account/" }
+    { bank = "UBS"; fee = 0.15; sourceLink = "https://www.ubs.com/ch/en/private/accounts-and-cards/accounts/custody-account.html"; calculationMethod = "0.15% p.a. of the portfolio value, charged quarterly" },
+    { bank = "Swissquote"; fee = 0.12; sourceLink = "https://en.swissquote.com/trading/pricing"; calculationMethod = "0.12% p.a. of the portfolio value, minimum CHF 50 per quarter" },
+    { bank = "ZKB"; fee = 0.14; sourceLink = "https://www.zkb.ch/en/private-customers/investments/custody-account-and-trading.html"; calculationMethod = "0.14% p.a. of the portfolio value, charged quarterly" },
+    { bank = "Raiffeisen"; fee = 0.13; sourceLink = "https://www.raiffeisen.ch/rch/en/private-clients/invest/custody-account.html"; calculationMethod = "0.13% p.a. of the portfolio value, minimum CHF 25 per quarter" },
+    { bank = "Postfinance"; fee = 0.11; sourceLink = "https://www.postfinance.ch/en/private/products/investing/custody-account.html"; calculationMethod = "0.11% p.a. of the portfolio value, charged quarterly" },
+    { bank = "Julius Baer"; fee = 0.16; sourceLink = "https://www.juliusbaer.com/en/services/custody-account/"; calculationMethod = "0.16% p.a. of the portfolio value, charged quarterly" }
   ];
 
   public func addFund(name: Text, ticker: Text, annualReturn: Float, expenseRatio: Float) : async () {

@@ -8,6 +8,7 @@ export const idlFactory = ({ IDL }) => {
   const CustodyFee = IDL.Record({
     'fee' : IDL.Float64,
     'bank' : IDL.Text,
+    'calculationMethod' : IDL.Text,
     'sourceLink' : IDL.Text,
   });
   return IDL.Service({

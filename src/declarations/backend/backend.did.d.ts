@@ -5,6 +5,7 @@ import type { IDL } from '@dfinity/candid';
 export interface CustodyFee {
   'fee' : number,
   'bank' : string,
+  'calculationMethod' : string,
   'sourceLink' : string,
 }
 export interface Fund {

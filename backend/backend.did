@@ -8,6 +8,7 @@ type Fund =
 type CustodyFee = 
  record {
    bank: text;
+   calculationMethod: text;
    fee: float64;
    sourceLink: text;
  };

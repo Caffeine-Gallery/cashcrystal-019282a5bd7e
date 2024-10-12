@@ -51,9 +51,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   async function displayCustodyFees() {
     const custodyFees = await backend.getCustodyFees();
-    let feesHTML = '<table><tr><th>Bank</th><th>Custody Fee</th><th>Source</th></tr>';
+    let feesHTML = '<table><tr><th>Bank</th><th>Custody Fee</th><th>Calculation Method</th><th>Source</th></tr>';
     custodyFees.forEach(fee => {
-      feesHTML += `<tr><td>${fee.bank}</td><td>${fee.fee.toFixed(2)}%</td><td><a href="${fee.sourceLink}" target="_blank" rel="noopener noreferrer">Details</a></td></tr>`;
+      feesHTML += `
+        <tr>
+          <td>${fee.bank}</td>
+          <td>${fee.fee.toFixed(2)}%</td>
+          <td>${fee.calculationMethod}</td>
+          <td><a href="${fee.sourceLink}" target="_blank" rel="noopener noreferrer">Details</a></td>
+        </tr>`;
     });
     feesHTML += '</table>';
     custodyFeesList.innerHTML = feesHTML;
