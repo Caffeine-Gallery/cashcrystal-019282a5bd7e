@@ -9,6 +9,7 @@ type CustodyFee =
  record {
    bank: text;
    fee: float64;
+   sourceLink: text;
  };
 service : {
   addFund: (text, text, float64, float64) -> ();

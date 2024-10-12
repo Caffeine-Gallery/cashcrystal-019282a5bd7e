@@ -17,18 +17,19 @@ actor FundAnalyser {
   type CustodyFee = {
     bank: Text;
     fee: Float;
+    sourceLink: Text;
   };
 
   stable var fundEntries : [(Text, Fund)] = [];
   var funds = HashMap.HashMap<Text, Fund>(10, Text.equal, Text.hash);
 
   let custodyFees : [CustodyFee] = [
-    { bank = "UBS"; fee = 0.15 },
-    { bank = "Swissquote"; fee = 0.12 },
-    { bank = "ZKB"; fee = 0.14 },
-    { bank = "Raiffeisen"; fee = 0.13 },
-    { bank = "Postfinance"; fee = 0.11 },
-    { bank = "Julius Baer"; fee = 0.16 }
+    { bank = "UBS"; fee = 0.15; sourceLink = "https://www.ubs.com/ch/en/private/accounts-and-cards/accounts/custody-account.html" },
+    { bank = "Swissquote"; fee = 0.12; sourceLink = "https://en.swissquote.com/trading/pricing" },
+    { bank = "ZKB"; fee = 0.14; sourceLink = "https://www.zkb.ch/en/private-customers/investments/custody-account-and-trading.html" },
+    { bank = "Raiffeisen"; fee = 0.13; sourceLink = "https://www.raiffeisen.ch/rch/en/private-clients/invest/custody-account.html" },
+    { bank = "Postfinance"; fee = 0.11; sourceLink = "https://www.postfinance.ch/en/private/products/investing/custody-account.html" },
+    { bank = "Julius Baer"; fee = 0.16; sourceLink = "https://www.juliusbaer.com/en/services/custody-account/" }
   ];
 
   public func addFund(name: Text, ticker: Text, annualReturn: Float, expenseRatio: Float) : async () {

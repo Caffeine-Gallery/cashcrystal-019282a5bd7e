@@ -2,7 +2,11 @@ import type { Principal } from '@dfinity/principal';
 import type { ActorMethod } from '@dfinity/agent';
 import type { IDL } from '@dfinity/candid';
 
-export interface CustodyFee { 'fee' : number, 'bank' : string }
+export interface CustodyFee {
+  'fee' : number,
+  'bank' : string,
+  'sourceLink' : string,
+}
 export interface Fund {
   'ticker' : string,
   'name' : string,
