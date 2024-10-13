@@ -21,6 +21,7 @@ export interface ICPETP {
   'aum' : number,
   'websiteLink' : string,
   'name' : string,
+  'factsheetLink' : string,
 }
 export interface _SERVICE {
   'addFund' : ActorMethod<[string, string, number, number, string], undefined>,

@@ -31,6 +31,7 @@ actor FundAnalyser {
     name: Text;
     aum: Float;
     websiteLink: Text;
+    factsheetLink: Text;
   };
 
   stable var fundEntries : [(Text, Fund)] = [];
@@ -46,8 +47,8 @@ actor FundAnalyser {
   ];
 
   let icpETPs : [ICPETP] = [
-    { name = "Valour"; aum = 1000000.0; websiteLink = "https://valour.com/" },
-    { name = "Sygnum Platform Winners"; aum = 2000000.0; websiteLink = "https://www.sygnum.com/" }
+    { name = "Valour"; aum = 1000000.0; websiteLink = "https://valour.com/"; factsheetLink = "https://valour.com/products/icp" },
+    { name = "Sygnum Platform Winners"; aum = 2000000.0; websiteLink = "https://www.sygnum.com/"; factsheetLink = "https://www.sygnum.com/asset-management/platform-winners-index-etp/" }
   ];
 
   public func addFund(name: Text, ticker: Text, annualReturn: Float, expenseRatio: Float, category: Text) : async () {

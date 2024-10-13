@@ -20,6 +20,7 @@ export const idlFactory = ({ IDL }) => {
     'aum' : IDL.Float64,
     'websiteLink' : IDL.Text,
     'name' : IDL.Text,
+    'factsheetLink' : IDL.Text,
   });
   return IDL.Service({
     'addFund' : IDL.Func(

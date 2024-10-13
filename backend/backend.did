@@ -1,6 +1,7 @@
 type ICPETP = 
  record {
    aum: float64;
+   factsheetLink: text;
    name: text;
    websiteLink: text;
  };

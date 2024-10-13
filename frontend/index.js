@@ -107,13 +107,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   async function displayICPETPs() {
     const icpETPs = await backend.getICPETPs();
-    let etpsHTML = '<table><tr><th>ETP Name</th><th>Assets under Management (USD)</th><th>Website</th></tr>';
+    let etpsHTML = '<table><tr><th>ETP Name</th><th>Assets under Management (USD)</th><th>Website</th><th>Factsheet</th></tr>';
     icpETPs.forEach(etp => {
       etpsHTML += `
         <tr>
           <td>${etp.name}</td>
           <td>$${etp.aum.toLocaleString()}</td>
           <td><a href="${etp.websiteLink}" target="_blank" rel="noopener noreferrer">Details</a></td>
+          <td><a href="${etp.factsheetLink}" target="_blank" rel="noopener noreferrer">Factsheet</a></td>
         </tr>`;
     });
     etpsHTML += '</table>';
