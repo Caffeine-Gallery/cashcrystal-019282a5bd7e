@@ -16,6 +16,11 @@ export const idlFactory = ({ IDL }) => {
     'calculationMethod' : IDL.Text,
     'sourceLink' : IDL.Text,
   });
+  const ICPETP = IDL.Record({
+    'aum' : IDL.Float64,
+    'websiteLink' : IDL.Text,
+    'name' : IDL.Text,
+  });
   return IDL.Service({
     'addFund' : IDL.Func(
         [IDL.Text, IDL.Text, IDL.Float64, IDL.Float64, IDL.Text],
@@ -31,6 +36,7 @@ export const idlFactory = ({ IDL }) => {
     'getCustodyFees' : IDL.Func([], [IDL.Vec(CustodyFee)], ['query']),
     'getFund' : IDL.Func([IDL.Text], [IDL.Opt(Fund)], ['query']),
     'getFundsByCategory' : IDL.Func([IDL.Text], [IDL.Vec(Fund)], ['query']),
+    'getICPETPs' : IDL.Func([], [IDL.Vec(ICPETP)], ['query']),
   });
 };
 export const init = ({ IDL }) => { return []; };

@@ -47,7 +47,7 @@ section {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
+h2, h3 {
     color: #333;
 }
 
@@ -87,6 +87,7 @@ li {
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 1rem;
 }
 
 th, td {

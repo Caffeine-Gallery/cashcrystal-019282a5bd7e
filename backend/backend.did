@@ -1,3 +1,9 @@
+type ICPETP = 
+ record {
+   aum: float64;
+   name: text;
+   websiteLink: text;
+ };
 type FundCategory = 
  variant {
    CryptoETP;
@@ -25,4 +31,5 @@ service : {
   getCustodyFees: () -> (vec CustodyFee) query;
   getFund: (text) -> (opt Fund) query;
   getFundsByCategory: (text) -> (vec Fund) query;
+  getICPETPs: () -> (vec ICPETP) query;
 }

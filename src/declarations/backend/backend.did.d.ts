@@ -17,6 +17,11 @@ export interface Fund {
 }
 export type FundCategory = { 'CryptoETP' : null } |
   { 'EquityFund' : null };
+export interface ICPETP {
+  'aum' : number,
+  'websiteLink' : string,
+  'name' : string,
+}
 export interface _SERVICE {
   'addFund' : ActorMethod<[string, string, number, number, string], undefined>,
   'compareFunds' : ActorMethod<[Array<string>], Array<[] | [Fund]>>,
@@ -24,6 +29,7 @@ export interface _SERVICE {
   'getCustodyFees' : ActorMethod<[], Array<CustodyFee>>,
   'getFund' : ActorMethod<[string], [] | [Fund]>,
   'getFundsByCategory' : ActorMethod<[string], Array<Fund>>,
+  'getICPETPs' : ActorMethod<[], Array<ICPETP>>,
 }
 export declare const idlFactory: IDL.InterfaceFactory;
 export declare const init: (args: { IDL: typeof IDL }) => IDL.Type[];

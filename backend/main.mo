@@ -27,6 +27,12 @@ actor FundAnalyser {
     calculationMethod: Text;
   };
 
+  type ICPETP = {
+    name: Text;
+    aum: Float;
+    websiteLink: Text;
+  };
+
   stable var fundEntries : [(Text, Fund)] = [];
   var funds = HashMap.HashMap<Text, Fund>(10, Text.equal, Text.hash);
 
@@ -37,6 +43,11 @@ actor FundAnalyser {
     { bank = "Raiffeisen"; fee = 0.13; sourceLink = "https://www.raiffeisen.ch/rch/en/private-clients/invest/custody-account.html"; calculationMethod = "0.13% p.a. of the portfolio value, minimum CHF 25 per quarter" },
     { bank = "Postfinance"; fee = 0.11; sourceLink = "https://www.postfinance.ch/en/private/products/investing/custody-account.html"; calculationMethod = "0.11% p.a. of the portfolio value, charged quarterly" },
     { bank = "Julius Baer"; fee = 0.16; sourceLink = "https://www.juliusbaer.com/en/services/custody-account/"; calculationMethod = "0.16% p.a. of the portfolio value, charged quarterly" }
+  ];
+
+  let icpETPs : [ICPETP] = [
+    { name = "Valour"; aum = 1000000.0; websiteLink = "https://valour.com/" },
+    { name = "Sygnum Platform Winners"; aum = 2000000.0; websiteLink = "https://www.sygnum.com/" }
   ];
 
   public func addFund(name: Text, ticker: Text, annualReturn: Float, expenseRatio: Float, category: Text) : async () {
@@ -70,6 +81,10 @@ actor FundAnalyser {
 
   public query func getCustodyFees() : async [CustodyFee] {
     custodyFees
+  };
+
+  public query func getICPETPs() : async [ICPETP] {
+    icpETPs
   };
 
   system func preupgrade() {

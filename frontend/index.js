@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const cryptoETPsButton = document.getElementById('crypto-etps');
   const equityFundsContent = document.getElementById('equity-funds-content');
   const cryptoETPsContent = document.getElementById('crypto-etps-content');
+  const icpETPsList = document.getElementById('icp-etps-list');
 
   let currentCategory = 'EquityFund';
 
@@ -48,6 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     cryptoETPsButton.classList.add('active');
     equityFundsContent.style.display = 'none';
     cryptoETPsContent.style.display = 'block';
+    displayICPETPs();
   }
 
   async function updateFundList(category) {
@@ -101,6 +103,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
     feesHTML += '</table>';
     custodyFeesList.innerHTML = feesHTML;
+  }
+
+  async function displayICPETPs() {
+    const icpETPs = await backend.getICPETPs();
+    let etpsHTML = '<table><tr><th>ETP Name</th><th>Assets under Management (USD)</th><th>Website</th></tr>';
+    icpETPs.forEach(etp => {
+      etpsHTML += `
+        <tr>
+          <td>${etp.name}</td>
+          <td>$${etp.aum.toLocaleString()}</td>
+          <td><a href="${etp.websiteLink}" target="_blank" rel="noopener noreferrer">Details</a></td>
+        </tr>`;
+    });
+    etpsHTML += '</table>';
+    icpETPsList.innerHTML = etpsHTML;
   }
 
   await updateFundList(currentCategory);
