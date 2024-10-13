@@ -30,7 +30,8 @@ nav#main-menu button {
     transition: background-color 0.3s;
 }
 
-nav#main-menu button:hover {
+nav#main-menu button:hover,
+nav#main-menu button.active {
     background-color: #666;
 }
 
@@ -96,4 +97,17 @@ th, td {
 
 th {
     background-color: #f2f2f2;
+}
+
+#equity-funds-content,
+#crypto-etps-content {
+    transition: opacity 0.3s ease-in-out;
+}
+
+#crypto-etps-content {
+    opacity: 0;
+}
+
+#crypto-etps-content:not([style*="display: none"]) {
+    opacity: 1;
 }

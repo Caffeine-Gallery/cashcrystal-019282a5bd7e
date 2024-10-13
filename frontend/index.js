@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const custodyFeesList = document.getElementById('custody-fees-list');
   const equityFundsButton = document.getElementById('equity-funds');
   const cryptoETPsButton = document.getElementById('crypto-etps');
+  const equityFundsContent = document.getElementById('equity-funds-content');
+  const cryptoETPsContent = document.getElementById('crypto-etps-content');
 
   let currentCategory = 'EquityFund';
 
@@ -26,12 +28,27 @@ document.addEventListener('DOMContentLoaded', async () => {
   equityFundsButton.addEventListener('click', () => {
     currentCategory = 'EquityFund';
     updateFundList(currentCategory);
+    showEquityFunds();
   });
 
   cryptoETPsButton.addEventListener('click', () => {
     currentCategory = 'CryptoETP';
-    updateFundList(currentCategory);
+    showCryptoETPs();
   });
+
+  function showEquityFunds() {
+    equityFundsButton.classList.add('active');
+    cryptoETPsButton.classList.remove('active');
+    equityFundsContent.style.display = 'block';
+    cryptoETPsContent.style.display = 'none';
+  }
+
+  function showCryptoETPs() {
+    equityFundsButton.classList.remove('active');
+    cryptoETPsButton.classList.add('active');
+    equityFundsContent.style.display = 'none';
+    cryptoETPsContent.style.display = 'block';
+  }
 
   async function updateFundList(category) {
     const funds = await backend.getFundsByCategory(category);

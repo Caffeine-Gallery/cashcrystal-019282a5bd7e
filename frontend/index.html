@@ -11,36 +11,42 @@
         <h1>Fund Analyser</h1>
     </header>
     <nav id="main-menu">
-        <button id="equity-funds">Equity Funds</button>
+        <button id="equity-funds" class="active">Equity Funds</button>
         <button id="crypto-etps">Crypto ETPs</button>
     </nav>
     <main>
-        <section id="add-fund">
-            <h2>Add New Fund</h2>
-            <form id="add-fund-form">
-                <input type="text" id="fund-name" placeholder="Fund Name" required>
-                <input type="text" id="fund-ticker" placeholder="Ticker" required>
-                <input type="number" id="annual-return" placeholder="Annual Return (%)" step="0.01" required>
-                <input type="number" id="expense-ratio" placeholder="Expense Ratio (%)" step="0.01" required>
-                <select id="fund-category" required>
-                    <option value="EquityFund">Equity Fund</option>
-                    <option value="CryptoETP">Crypto ETP</option>
-                </select>
-                <button type="submit">Add Fund</button>
-            </form>
-        </section>
-        <section id="fund-list">
-            <h2>Fund List</h2>
-            <ul id="funds"></ul>
-        </section>
-        <section id="fund-comparison">
-            <h2>Fund Comparison</h2>
-            <div id="comparison-result"></div>
-        </section>
-        <section id="custody-fees">
-            <h2>Swiss Bank Custody Fees</h2>
-            <div id="custody-fees-list"></div>
-        </section>
+        <div id="equity-funds-content">
+            <section id="add-fund">
+                <h2>Add New Fund</h2>
+                <form id="add-fund-form">
+                    <input type="text" id="fund-name" placeholder="Fund Name" required>
+                    <input type="text" id="fund-ticker" placeholder="Ticker" required>
+                    <input type="number" id="annual-return" placeholder="Annual Return (%)" step="0.01" required>
+                    <input type="number" id="expense-ratio" placeholder="Expense Ratio (%)" step="0.01" required>
+                    <select id="fund-category" required>
+                        <option value="EquityFund">Equity Fund</option>
+                        <option value="CryptoETP">Crypto ETP</option>
+                    </select>
+                    <button type="submit">Add Fund</button>
+                </form>
+            </section>
+            <section id="fund-list">
+                <h2>Fund List</h2>
+                <ul id="funds"></ul>
+            </section>
+            <section id="fund-comparison">
+                <h2>Fund Comparison</h2>
+                <div id="comparison-result"></div>
+            </section>
+            <section id="custody-fees">
+                <h2>Swiss Bank Custody Fees</h2>
+                <div id="custody-fees-list"></div>
+            </section>
+        </div>
+        <div id="crypto-etps-content" style="display: none;">
+            <h2>Crypto ETPs</h2>
+            <p>Content for Crypto ETPs will be available soon.</p>
+        </div>
     </main>
     <script type="module" src="index.js"></script>
 </body>
