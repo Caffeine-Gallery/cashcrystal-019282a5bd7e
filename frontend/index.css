@@ -13,6 +13,27 @@ header {
     padding: 1rem;
 }
 
+nav#main-menu {
+    display: flex;
+    justify-content: center;
+    background-color: #444;
+    padding: 0.5rem;
+}
+
+nav#main-menu button {
+    background-color: #555;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+nav#main-menu button:hover {
+    background-color: #666;
+}
+
 main {
     padding: 2rem;
 }
@@ -34,7 +55,7 @@ form {
     flex-direction: column;
 }
 
-input, button {
+input, select, button {
     margin-bottom: 1rem;
     padding: 0.5rem;
 }

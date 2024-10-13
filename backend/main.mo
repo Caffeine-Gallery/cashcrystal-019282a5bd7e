@@ -7,11 +7,17 @@ import Iter "mo:base/Iter";
 import Text "mo:base/Text";
 
 actor FundAnalyser {
+  type FundCategory = {
+    #EquityFund;
+    #CryptoETP;
+  };
+
   type Fund = {
     name: Text;
     ticker: Text;
     annualReturn: Float;
     expenseRatio: Float;
+    category: FundCategory;
   };
 
   type CustodyFee = {
@@ -33,12 +39,14 @@ actor FundAnalyser {
     { bank = "Julius Baer"; fee = 0.16; sourceLink = "https://www.juliusbaer.com/en/services/custody-account/"; calculationMethod = "0.16% p.a. of the portfolio value, charged quarterly" }
   ];
 
-  public func addFund(name: Text, ticker: Text, annualReturn: Float, expenseRatio: Float) : async () {
+  public func addFund(name: Text, ticker: Text, annualReturn: Float, expenseRatio: Float, category: Text) : async () {
+    let fundCategory = if (category == "EquityFund") #EquityFund else #CryptoETP;
     let fund : Fund = {
       name = name;
       ticker = ticker;
       annualReturn = annualReturn;
       expenseRatio = expenseRatio;
+      category = fundCategory;
     };
     funds.put(ticker, fund);
   };
@@ -49,6 +57,11 @@ actor FundAnalyser {
 
   public query func getAllFunds() : async [Fund] {
     Iter.toArray(funds.vals())
+  };
+
+  public query func getFundsByCategory(category: Text) : async [Fund] {
+    let fundCategory = if (category == "EquityFund") #EquityFund else #CryptoETP;
+    Array.filter<Fund>(Iter.toArray(funds.vals()), func (fund) { fund.category == fundCategory })
   };
 
   public query func compareFunds(tickers: [Text]) : async [?Fund] {

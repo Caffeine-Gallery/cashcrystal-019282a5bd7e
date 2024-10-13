@@ -11,15 +11,19 @@ export interface CustodyFee {
 export interface Fund {
   'ticker' : string,
   'name' : string,
+  'category' : FundCategory,
   'annualReturn' : number,
   'expenseRatio' : number,
 }
+export type FundCategory = { 'CryptoETP' : null } |
+  { 'EquityFund' : null };
 export interface _SERVICE {
-  'addFund' : ActorMethod<[string, string, number, number], undefined>,
+  'addFund' : ActorMethod<[string, string, number, number, string], undefined>,
   'compareFunds' : ActorMethod<[Array<string>], Array<[] | [Fund]>>,
   'getAllFunds' : ActorMethod<[], Array<Fund>>,
   'getCustodyFees' : ActorMethod<[], Array<CustodyFee>>,
   'getFund' : ActorMethod<[string], [] | [Fund]>,
+  'getFundsByCategory' : ActorMethod<[string], Array<Fund>>,
 }
 export declare const idlFactory: IDL.InterfaceFactory;
 export declare const init: (args: { IDL: typeof IDL }) => IDL.Type[];

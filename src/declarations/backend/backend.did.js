@@ -1,7 +1,12 @@
 export const idlFactory = ({ IDL }) => {
+  const FundCategory = IDL.Variant({
+    'CryptoETP' : IDL.Null,
+    'EquityFund' : IDL.Null,
+  });
   const Fund = IDL.Record({
     'ticker' : IDL.Text,
     'name' : IDL.Text,
+    'category' : FundCategory,
     'annualReturn' : IDL.Float64,
     'expenseRatio' : IDL.Float64,
   });
@@ -13,7 +18,7 @@ export const idlFactory = ({ IDL }) => {
   });
   return IDL.Service({
     'addFund' : IDL.Func(
-        [IDL.Text, IDL.Text, IDL.Float64, IDL.Float64],
+        [IDL.Text, IDL.Text, IDL.Float64, IDL.Float64, IDL.Text],
         [],
         [],
       ),
@@ -25,6 +30,7 @@ export const idlFactory = ({ IDL }) => {
     'getAllFunds' : IDL.Func([], [IDL.Vec(Fund)], ['query']),
     'getCustodyFees' : IDL.Func([], [IDL.Vec(CustodyFee)], ['query']),
     'getFund' : IDL.Func([IDL.Text], [IDL.Opt(Fund)], ['query']),
+    'getFundsByCategory' : IDL.Func([IDL.Text], [IDL.Vec(Fund)], ['query']),
   });
 };
 export const init = ({ IDL }) => { return []; };

@@ -10,6 +10,10 @@
     <header>
         <h1>Fund Analyser</h1>
     </header>
+    <nav id="main-menu">
+        <button id="equity-funds">Equity Funds</button>
+        <button id="crypto-etps">Crypto ETPs</button>
+    </nav>
     <main>
         <section id="add-fund">
             <h2>Add New Fund</h2>
@@ -18,6 +22,10 @@
                 <input type="text" id="fund-ticker" placeholder="Ticker" required>
                 <input type="number" id="annual-return" placeholder="Annual Return (%)" step="0.01" required>
                 <input type="number" id="expense-ratio" placeholder="Expense Ratio (%)" step="0.01" required>
+                <select id="fund-category" required>
+                    <option value="EquityFund">Equity Fund</option>
+                    <option value="CryptoETP">Crypto ETP</option>
+                </select>
                 <button type="submit">Add Fund</button>
             </form>
         </section>

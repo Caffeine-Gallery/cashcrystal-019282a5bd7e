@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   const fundList = document.getElementById('funds');
   const comparisonResult = document.getElementById('comparison-result');
   const custodyFeesList = document.getElementById('custody-fees-list');
+  const equityFundsButton = document.getElementById('equity-funds');
+  const cryptoETPsButton = document.getElementById('crypto-etps');
+
+  let currentCategory = 'EquityFund';
 
   addFundForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -12,14 +16,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     const ticker = document.getElementById('fund-ticker').value;
     const annualReturn = parseFloat(document.getElementById('annual-return').value);
     const expenseRatio = parseFloat(document.getElementById('expense-ratio').value);
+    const category = document.getElementById('fund-category').value;
 
-    await backend.addFund(name, ticker, annualReturn, expenseRatio);
+    await backend.addFund(name, ticker, annualReturn, expenseRatio, category);
     addFundForm.reset();
-    await updateFundList();
+    await updateFundList(currentCategory);
   });
 
-  async function updateFundList() {
-    const funds = await backend.getAllFunds();
+  equityFundsButton.addEventListener('click', () => {
+    currentCategory = 'EquityFund';
+    updateFundList(currentCategory);
+  });
+
+  cryptoETPsButton.addEventListener('click', () => {
+    currentCategory = 'CryptoETP';
+    updateFundList(currentCategory);
+  });
+
+  async function updateFundList(category) {
+    const funds = await backend.getFundsByCategory(category);
     fundList.innerHTML = '';
     funds.forEach(fund => {
       const li = document.createElement('li');
@@ -38,10 +53,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     const tickers = funds.map(fund => fund.ticker);
     const comparedFunds = await backend.compareFunds(tickers);
 
-    let comparisonHTML = '<table><tr><th>Fund</th><th>Annual Return</th><th>Expense Ratio</th></tr>';
+    let comparisonHTML = '<table><tr><th>Fund</th><th>Category</th><th>Annual Return</th><th>Expense Ratio</th></tr>';
     comparedFunds.forEach(fund => {
       if (fund) {
-        comparisonHTML += `<tr><td>${fund.name}</td><td>${fund.annualReturn.toFixed(2)}%</td><td>${fund.expenseRatio.toFixed(2)}%</td></tr>`;
+        comparisonHTML += `
+          <tr>
+            <td>${fund.name}</td>
+            <td>${fund.category == 'EquityFund' ? 'Equity Fund' : 'Crypto ETP'}</td>
+            <td>${fund.annualReturn.toFixed(2)}%</td>
+            <td>${fund.expenseRatio.toFixed(2)}%</td>
+          </tr>`;
       }
     });
     comparisonHTML += '</table>';
@@ -65,7 +86,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     custodyFeesList.innerHTML = feesHTML;
   }
 
-  await updateFundList();
+  await updateFundList(currentCategory);
   compareFunds();
   displayCustodyFees();
 });

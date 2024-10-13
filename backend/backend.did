@@ -1,6 +1,12 @@
+type FundCategory = 
+ variant {
+   CryptoETP;
+   EquityFund;
+ };
 type Fund = 
  record {
    annualReturn: float64;
+   category: FundCategory;
    expenseRatio: float64;
    name: text;
    ticker: text;
@@ -13,9 +19,10 @@ type CustodyFee =
    sourceLink: text;
  };
 service : {
-  addFund: (text, text, float64, float64) -> ();
+  addFund: (text, text, float64, float64, text) -> ();
   compareFunds: (vec text) -> (vec opt Fund) query;
   getAllFunds: () -> (vec Fund) query;
   getCustodyFees: () -> (vec CustodyFee) query;
   getFund: (text) -> (opt Fund) query;
+  getFundsByCategory: (text) -> (vec Fund) query;
 }
